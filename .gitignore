@@ -6,3 +6,5 @@ ENV
 node_modules/*
 .DS_Store
 data
+*.iml
+.idea/

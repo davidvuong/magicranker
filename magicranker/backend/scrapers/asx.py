@@ -2,17 +2,17 @@ import re
 import csv
 from StringIO import StringIO
 
-import attr
 import requests
 
 
-@attr.attrs
 class StockData(object):
+    def __init__(self, name, code, category):
+        self.name = name
+        self.code = code
+        self.category = category
 
-    name = attr.attrib()
-    code = attr.attrib()
-    category = attr.attrib()
-
+    def getName(self):
+        return self.name
 
 def get_full_stock_list(req=None):
     """
@@ -34,5 +34,5 @@ def get_full_stock_list(req=None):
 
 
 if __name__ == '__main__':
-    for stock in get_full_stock_list():
-        print stock
+    for i, stock in enumerate(get_full_stock_list()):
+        print(str(i) + ": " + stock.getName())

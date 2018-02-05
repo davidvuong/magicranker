@@ -1,6 +1,5 @@
 from datetime import datetime
 
-import attr
 import requests
 
 
@@ -11,29 +10,29 @@ class StockNotFound(Exception):
     pass
 
 
-@attr.attrs
 class PriceData(object):
 
     """Represents price data returned from Yahoo Finance."""
 
-    stock = attr.attrib()
-    date = attr.attrib()
-    close = attr.attrib()
-    volume = attr.attrib()
+    def __init__(self, stock, date, close, volume):
+        self.stock = stock
+        self.date = date
+        self.close = close
+        self.volume = volume
 
 
-@attr.attrs
 class KeyStatsData(object):
 
     """Represents key stats data returned from Yahoo Finance."""
 
-    stock = attr.attrib()
-    eps = attr.attrib()
-    roe = attr.attrib()
-    roa = attr.attrib()
-    bvps = attr.attrib()
-    pe = attr.attrib()
-    market_cap = attr.attrib()
+    def __init__(self, stock, eps, roe, roa, bvps, pe, market_cap):
+        self.stock = stock
+        self.eps = eps
+        self.roe = roe
+        self.roa = roa
+        self.bvps = bvps
+        self.pe = pe
+        self.market_cap = market_cap
 
 
 def get_key_stats(stock, req=None):
