@@ -6,11 +6,12 @@ import pycurl
 from BeautifulSoup import BeautifulSoup
 
 
+# User agent spoofing
 USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:2.0.1)'
 USER_AGENT += 'Gecko/20100101 Firefox/4.0.1'
 
 
-class ETrade():
+class CommSec(object):
     def __init__(self):
         self.user_agent = USER_AGENT
         self.headers = {'User-Agent': USER_AGENT,
@@ -128,6 +129,7 @@ class ETrade():
 
             data['periods'] = self._get_dates(trs)
             data['roe'] = self._get_values(trs, 'Return on equity (%)')
+            data['sales'] = self._get_values(trs, 'Sales ($)')
 
             # Get 3rd last table (should have Per Share stats in it)
             try:
@@ -138,8 +140,13 @@ class ETrade():
 
             data['shares_out'] = self._get_values(
                 trs, 'Shares Outstanding (m)')
+            data['dividend'] = self._get_values(trs, 'Dividends (cents)')
+            data['franking'] = self._get_values(trs, 'Franking (%)')
+            data['capital_spending'] = self._get_values(trs, 'Capital Spending (cents)')
+            data['debt_equity'] = self._get_values(trs, 'Debt/Equity (%)')
             data['book_value'] = self._get_values(trs, 'Book Value ($)')
             data['earnings'] = self._get_values(trs, 'Earnings (cents)')
-            data['pe'] = self._get_values(trs, 'Avg P/E Ratio')
+            data['cash_flow'] = self._get_values(trs, 'Cash Flow (cents)')
+            data['pe'] = self._get_values(trs, 'Avge Annual PE Ratio(%)')
 
         return data
